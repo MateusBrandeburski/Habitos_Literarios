@@ -14,8 +14,8 @@ class LivrosModel(settings.DBBaseModel):
     __tablename__ = 'livros_lidos'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    nome = Column(String(30))
-    genero = Column(String(20))
+    nome = Column(String(200))
+    genero = Column(String(200))
     numero_paginas = Column(Integer)
     ano = Column(Integer)
 
