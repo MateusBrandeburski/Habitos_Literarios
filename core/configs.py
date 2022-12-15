@@ -8,7 +8,7 @@ class Settings(BaseSettings):
     Configurações gerais usadas na aplicação
     """
     API_V1_STR: str = '/api/v1'
-    DB_URL: str = "postgresql+asyncpg://postgres:karateka30@localhost:5432/trovale_api"
+    DB_URL: str = "postgresql+asyncpg://postgres:karateka30@localhost:5432/habitos_literarios"
 
     DBBaseModel = declarative_base()
 
