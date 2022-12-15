@@ -16,7 +16,7 @@ from core.deps import get_session
 router = APIRouter()
 
 
-@router.post('/', response_model=LivrosSchema) # (devolve)livros Schemas, pydantic pega esse objeto schema e converte para Json... Talvez fosse o casso de passar uma List 
+@router.post('/', response_model=LivrosSchema, status_code=status.HTTP_201_CREATED) # (devolve)livros Schemas, pydantic pega esse objeto schema e converte para Json... Talvez fosse o casso de passar uma List 
 async def post_livros(livros: LivrosSchema, db: AsyncSession = Depends(get_session)): # retorno
     
     novos_livros = LivrosModel(nome=livros.nome, genero=livros.genero,
@@ -41,7 +41,7 @@ async def get_livros(db: AsyncSession = Depends(get_session)):
 
 
 
-@router.get('/{livro_id}', response_model=LivrosSchema)
+@router.get('/{livro_id}', response_model=LivrosSchema, status_code=status.HTTP_200_OK)
 async def get_livro(livro_id: int, db: AsyncSession = Depends(get_session)):
     async with db as session:
         query = select(LivrosModel).filter(LivrosModel.id == livro_id)
@@ -56,7 +56,7 @@ async def get_livro(livro_id: int, db: AsyncSession = Depends(get_session)):
             
 
 
-@router.put('/{livro_id}', response_model=LivrosSchema)
+@router.put('/{livro_id}', response_model=LivrosSchema, status_code=status.HTTP_202_ACCEPTED)
 async def put_livro(livro_id: int, livro: LivrosSchema, db: AsyncSession = Depends(get_session)):
        async with db as session:
         query = select(LivrosModel).filter(LivrosModel.id == livro_id)

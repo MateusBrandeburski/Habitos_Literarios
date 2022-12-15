@@ -10,5 +10,5 @@ async def get_session() -> Generator:
     try:
         yield session
     finally:
-        #await session.close()
-        print('sessão/banco de dados aberta, mas não fechada...')
+        await session.close()
+        #print('sessão/banco de dados aberta, mas não fechada...')
