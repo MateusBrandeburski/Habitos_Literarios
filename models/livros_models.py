@@ -1,7 +1,7 @@
 from core.configs import settings
 from sqlalchemy import Column, Integer, String
 from typing import List
-from schemas.livros_schema import LivrosSchema
+
 
 
 """
@@ -21,7 +21,8 @@ class LivrosModel(settings.DBBaseModel):
     ano = Column(Integer)
 
 class ListaLivros(settings.DBBaseModel):
-    livros = List[LivrosSchema]
+    __tablename__ = 'livros_lidos'
+    livros = List[LivrosModel]
 
 
 

@@ -21,14 +21,11 @@ router = APIRouter()
 async def post_livros(livros: list, db: AsyncSession = Depends(get_session)): # retorno
     
     for livro in livros:
-        novos_livros = LivrosModel(nome=livro.nome, genero=livro.genero,
-                                        numero_paginas=livro.numero_paginas,
-                                        ano=livro.ano)
+        novos_livros = LivrosModel(**livro)
 
         db.add(novos_livros) # db recebe
 
     await db.commit() # salva
-
     return novos_livros 
 
 
