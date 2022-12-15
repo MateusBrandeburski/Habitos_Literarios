@@ -13,6 +13,7 @@ Models = sqlalchemy > dados
 """
 
 
+
 class LivrosSchema(SchemaCBaseModel):
 
     id: Optional[int]
@@ -23,3 +24,8 @@ class LivrosSchema(SchemaCBaseModel):
 
     class Config:
         orm_mode = True
+
+
+
+            
+            

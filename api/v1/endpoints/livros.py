@@ -11,19 +11,22 @@ from sqlalchemy.future import select
 
 from models.livros_models import LivrosModel
 from schemas.livros_schema import LivrosSchema
+
 from core.deps import get_session
 
 router = APIRouter()
 
 
-@router.post('/', response_model=LivrosSchema, status_code=status.HTTP_201_CREATED) # (devolve)livros Schemas, pydantic pega esse objeto schema e converte para Json... Talvez fosse o casso de passar uma List 
-async def post_livros(livros: LivrosSchema, db: AsyncSession = Depends(get_session)): # retorno
+@router.post('/', response_model=List[LivrosSchema], status_code=status.HTTP_201_CREATED) # (devolve)livros Schemas, pydantic pega esse objeto schema e converte para Json... Talvez fosse o casso de passar uma List 
+async def post_livros(livros: list, db: AsyncSession = Depends(get_session)): # retorno
     
-    novos_livros = LivrosModel(nome=livros.nome, genero=livros.genero,
-                                numero_paginas=livros.numero_paginas,
-                                ano=livros.ano)
+    for livro in livros:
+        novos_livros = LivrosModel(nome=livro.nome, genero=livro.genero,
+                                        numero_paginas=livro.numero_paginas,
+                                        ano=livro.ano)
 
-    db.add(novos_livros) # db recebe
+        db.add(novos_livros) # db recebe
+
     await db.commit() # salva
 
     return novos_livros 

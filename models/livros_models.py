@@ -1,6 +1,7 @@
 from core.configs import settings
 from sqlalchemy import Column, Integer, String
-
+from typing import List
+from schemas.livros_schema import LivrosSchema
 
 
 """
@@ -18,5 +19,9 @@ class LivrosModel(settings.DBBaseModel):
     genero = Column(String(200))
     numero_paginas = Column(Integer)
     ano = Column(Integer)
+
+class ListaLivros(settings.DBBaseModel):
+    livros = List[LivrosSchema]
+
 
 

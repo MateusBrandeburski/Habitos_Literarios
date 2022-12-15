@@ -12,7 +12,6 @@ class Settings(BaseSettings):
 
     DBBaseModel = declarative_base()
 
-
     class Config: 
         case_sensitive = True #manter tudo maiúsuco ou minúsculo
 
